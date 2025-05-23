@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Flashing Chaos</title>
+  <title>Singh's Flashing Numbers</title>
   <style>
     body {
       margin: 0;
@@ -9,14 +9,26 @@
       overflow: hidden;
       position: relative;
       height: 100vh;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .title {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #00ffcc;
+      font-size: 28px;
+      font-weight: bold;
+      z-index: 10;
+      text-align: center;
     }
 
     .number {
       position: absolute;
       font-size: 50px;
       font-weight: bold;
-      color: #00ffcc;
-      font-family: 'Arial', sans-serif;
+      color: #6bb5ff;
       animation: fadeOut 0.3s ease-out forwards;
     }
 
@@ -27,6 +39,8 @@
   </style>
 </head>
 <body>
+  <div class="title">Flashing Numbers</div>
+
   <script>
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -38,17 +52,17 @@
       el.className = "number";
       el.textContent = num;
 
-      el.style.top = getRandomInt(0, window.innerHeight - 50) + "px";
+      el.style.top = getRandomInt(40, window.innerHeight - 50) + "px"; // offset to not overlap the title
       el.style.left = getRandomInt(0, window.innerWidth - 50) + "px";
 
       document.body.appendChild(el);
 
       setTimeout(() => {
         el.remove();
-      }, 300); // number disappears after 300ms
+      }, 300);
     }
 
-    setInterval(spawnNumber, 50); // spawn new number every 50ms
+    setInterval(spawnNumber, 50);
   </script>
 </body>
 </html>
