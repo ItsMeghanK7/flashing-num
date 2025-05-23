@@ -12,25 +12,21 @@
       font-family: 'Arial', sans-serif;
     }
 
-    .title {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #ffffff;
-      font-size: 50px;
-      font-weight: bold;
-      z-index: 10;
-      text-align: center;
-    }
-
+ .title {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 30px;  /* ⬅️ this adds space between title and button */
+  text-align: center;
+  color: #00ffcc;
+  font-size: 60px;
+  font-weight: bold;
+  z-index: 10;
+}
 .button {
-  position: absolute;
-  top: 120px;  /* make this match */
-  left: 50%;
-  transform: translateX(-50%);
+  display: block;
+  margin: 0 auto;
   padding: 15px 30px;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   background-color: #00ffcc;
   color: black;
