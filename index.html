@@ -1,33 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Random Number Flash</title>
+  <title>Flashing Chaos</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-
     body {
-      font-family: 'Orbitron', sans-serif;
-      background: #111;
-      color: #00ffcc;
-      font-size: 120px;
-      text-align: center;
       margin: 0;
+      background: black;
+      overflow: hidden;
+      position: relative;
       height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    }
+
+    .number {
+      position: absolute;
+      font-size: 50px;
+      font-weight: bold;
+      color: #00ffcc;
+      font-family: 'Arial', sans-serif;
+      animation: fadeOut 0.3s ease-out forwards;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div id="number">1</div>
-
   <script>
-    const numberDiv = document.getElementById("number");
-    setInterval(() => {
-      const randomNum = Math.floor(Math.random() * 10) + 1;
-      numberDiv.textContent = randomNum;
-    }, 100);
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function spawnNumber() {
+      const num = getRandomInt(1, 10);
+      const el = document.createElement("div");
+      el.className = "number";
+      el.textContent = num;
+
+      el.style.top = getRandomInt(0, window.innerHeight - 50) + "px";
+      el.style.left = getRandomInt(0, window.innerWidth - 50) + "px";
+
+      document.body.appendChild(el);
+
+      setTimeout(() => {
+        el.remove();
+      }, 300); // number disappears after 300ms
+    }
+
+    setInterval(spawnNumber, 50); // spawn new number every 50ms
   </script>
 </body>
 </html>
