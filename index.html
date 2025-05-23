@@ -58,40 +58,50 @@
   <div class="title">Singh's Flashing Numbers</div>
   <button class="button" id="toggleBtn">Stop</button>
 
-  <script>
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+ <script>
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function spawnNumber() {
+    const num = getRandomInt(1, 10);
+    const el = document.createElement("div");
+    el.className = "number";
+    el.textContent = num;
+
+    el.style.top = getRandomInt(80, window.innerHeight - 50) + "px";
+    el.style.left = getRandomInt(0, window.innerWidth - 50) + "px";
+
+    document.body.appendChild(el);
+
+    setTimeout(() => {
+      el.remove();
+    }, 300);
+  }
+
+  let intervalId = setInterval(() => {
+    for (let i = 0; i < 3; i++) {
+      spawnNumber();
     }
+  }, 50);
 
-    function spawnNumber() {
-      const num = getRandomInt(1, 10);
-      const el = document.createElement("div");
-      el.className = "number";
-      el.textContent = num;
+  let running = true;
 
-      el.style.top = getRandomInt(80, window.innerHeight - 50) + "px";
-      el.style.left = getRandomInt(0, window.innerWidth - 50) + "px";
-
-      document.body.appendChild(el);
-
-      setTimeout(() => {
-        el.remove();
-      }, 300);
+  document.getElementById("toggleBtn").addEventListener("click", () => {
+    if (running) {
+      clearInterval(intervalId);
+      document.getElementById("toggleBtn").textContent = "Start";
+    } else {
+      intervalId = setInterval(() => {
+        for (let i = 0; i < 3; i++) {
+          spawnNumber();
+        }
+      }, 50);
+      document.getElementById("toggleBtn").textContent = "Stop";
     }
+    running = !running;
+  });
+</script>
 
-    let intervalId = setInterval(spawnNumber, 50);
-    let running = true;
-
-    document.getElementById("toggleBtn").addEventListener("click", () => {
-      if (running) {
-        clearInterval(intervalId);
-        document.getElementById("toggleBtn").textContent = "Start";
-      } else {
-        intervalId = setInterval(spawnNumber, 50);
-        document.getElementById("toggleBtn").textContent = "Stop";
-      }
-      running = !running;
-    });
-  </script>
 </body>
 </html>
