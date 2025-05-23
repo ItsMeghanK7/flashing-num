@@ -17,11 +17,27 @@
       top: 10px;
       left: 50%;
       transform: translateX(-50%);
-      color: #ffffff;
+      color: #00ffcc;
       font-size: 28px;
       font-weight: bold;
       z-index: 10;
       text-align: center;
+    }
+
+    .button {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #00ffcc;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 10;
     }
 
     .number {
@@ -40,6 +56,7 @@
 </head>
 <body>
   <div class="title">Singh's Flashing Numbers</div>
+  <button class="button" id="toggleBtn">Stop</button>
 
   <script>
     function getRandomInt(min, max) {
@@ -52,7 +69,7 @@
       el.className = "number";
       el.textContent = num;
 
-      el.style.top = getRandomInt(40, window.innerHeight - 50) + "px"; // offset to not overlap the title
+      el.style.top = getRandomInt(80, window.innerHeight - 50) + "px";
       el.style.left = getRandomInt(0, window.innerWidth - 50) + "px";
 
       document.body.appendChild(el);
@@ -62,7 +79,19 @@
       }, 300);
     }
 
-    setInterval(spawnNumber, 50);
+    let intervalId = setInterval(spawnNumber, 50);
+    let running = true;
+
+    document.getElementById("toggleBtn").addEventListener("click", () => {
+      if (running) {
+        clearInterval(intervalId);
+        document.getElementById("toggleBtn").textContent = "Start";
+      } else {
+        intervalId = setInterval(spawnNumber, 50);
+        document.getElementById("toggleBtn").textContent = "Stop";
+      }
+      running = !running;
+    });
   </script>
 </body>
 </html>
