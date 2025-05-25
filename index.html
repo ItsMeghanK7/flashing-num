@@ -3,6 +3,12 @@
 <head>
   <title>Singh's Flashing Numbers</title>
   <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* prevents scrolling */
+  }
+
   body {
     margin: 0;
     background: black;
@@ -12,76 +18,54 @@
     width: 100vw; /* keeps page fixed size */
     font-family: 'Arial', sans-serif;
   }
-    
-  html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* prevents scrolling */
-  }
-    
-.title {
-  position: relative;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  text-align: center;
-  color: #ffffff;
-  font-size: 60px; /* keep consistent across all sizes */
-  font-weight: bold;
-  z-index: 10;
-}
 
-    .button {
-      display: block;
-      margin: 0 auto;
-      padding: 15px 30px;
-      font-size: 22px;
-      font-weight: bold;
-      background-color: #f21137;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 10;
-    }
+  .title {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 60px; /* consistent size */
+    font-weight: bold;
+    z-index: 10;
+  }
+
+  .button {
+    display: block;
+    margin: 0 auto;
+    padding: 15px 30px;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: #f21137;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 10;
+  }
 
   .number {
-  position: absolute;
-  font-size: 150px;
-  font-weight: bold;
-  color: white;
-  padding: 20px 30px;
-  border-radius: 10px;
-  text-align: center;
-  animation: fadeOut 0.4s ease-out forwards;
-}
-
-@media (max-width: 768px) {
-  .number {
-    font-size: 120px;
-    padding: 8px 15px;  /* 👈 This is the change! */
+    position: absolute;
+    font-size: 150px;
+    font-weight: bold;
+    color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    animation: fadeOut 0.4s ease-out forwards;
   }
-}
 
-  .number {
-    font-size: 130px;
+  @media (max-width: 768px) {
+    .number {
+      font-size: 120px;
+      padding: 8px 15px;
+    }
   }
-}
 
-      .button {
-        top: 120px;
-        font-size: 24px;
-        padding: 18px 35px;
-      }
-
-      .number {
-        font-size: 200px;
-      }
-    }
-
-    @keyframes fadeOut {
-      from { opacity: 1; }
-      to { opacity: 0; }
-    }
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
   </style>
 </head>
 <body>
