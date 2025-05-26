@@ -1,138 +1,120 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Singh's Horse Numbers</title>
+  <title>Singh's Flashing Numbers</title>
   <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* prevents scrolling */
-  }
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+    }
 
-  body {
-    margin: 0;
-    background: black;
-    overflow: hidden;
-    position: relative;
-    height: 100vh;
-    width: 100vw; /* keeps page fixed size */
-    font-family: 'Arial', sans-serif;
-  }
+ .title {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 30px;  /* ⬅️ this adds space between title and button */
+  text-align: center;
+  color: #ffffff;
+  font-size: 60px;
+  font-weight: bold;
+  z-index: 10;
+}
+.button {
+  display: block;
+  margin: 0 auto;
+  padding: 15px 30px;
+  font-size: 22px;
+  font-weight: bold;
+  background-color: #f21137;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10;
+}
 
+.number {
+  position: absolute;
+  font-size: 150px;
+  font-weight: bold;
+  color: #6bb5ff;
+  animation: fadeOut 0.4s ease-out forwards;
+}
+
+@media (max-width: 768px) {
   .title {
-    position: relative;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    text-align: center;
-    color: #ffffff;
-    font-size: 60px; /* consistent size */
-    font-weight: bold;
-    z-index: 10;
+    font-size: 200px;
   }
 
   .button {
-    display: block;
-    margin: 0 auto;
-    padding: 15px 30px;
-    font-size: 22px;
-    font-weight: bold;
-    background-color: #f21137;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 10;
+    top: 120px; /* ⬅️ move button lower to avoid overlap */
+    font-size: 24px;
+    padding: 18px 35px;
   }
 
   .number {
-    position: absolute;
     font-size: 150px;
-    font-weight: bold;
-    color: white;
-    padding: 20px 30px;
-    border-radius: 10px;
-    text-align: center;
-    animation: fadeOut 0.4s ease-out forwards;
-    border: 2px solid white;
   }
+}
 
-  @media (max-width: 768px) {
-    .number {
-      font-size: 120px;
-      padding: 8px 15px;
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
     }
-  }
-
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
   </style>
 </head>
 <body>
   <div class="title">Singh's Flashing Numbers</div>
   <button class="button" id="toggleBtn">Stop</button>
 
-  <script>
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+ <script>
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function spawnNumber() {
+    const num = getRandomInt(0, 9);
+    const el = document.createElement("div");
+    el.className = "number";
+    el.textContent = num;
+
+    el.style.top = getRandomInt(80, window.innerHeight - 50) + "px";
+    el.style.left = getRandomInt(0, window.innerWidth - 50) + "px";
+
+    document.body.appendChild(el);
+
+    setTimeout(() => {
+      el.remove();
+    }, 300);
+  }
+
+  let intervalId = setInterval(() => {
+    for (let i = 0; i < 3; i++) {
+      spawnNumber();
     }
+  }, 50);
 
-    function spawnNumber() {
-      const num = getRandomInt(0, 9);
-      const el = document.createElement("div");
-      el.className = "number";
-      el.textContent = num;
+  let running = true;
 
-      // Fixed colors for each number (background + text)
-      const colors = {
-        0: { bg: '#2d234a', text: '#FFFFFF' }, // purp bg, white text
-        1: { bg: '#D72638', text: '#FFFFFF' }, // red bg, white text
-        2: { bg: '#FFFFFF', text: '#000000' }, // white bg, black text
-        3: { bg: '#3A4E9D', text: '#FFFFFF' }, // Blue bg, white text
-        4: { bg: '#F5D547', text: '#000000' }, // yellow bg, black text
-        5: { bg: '#37A754', text: '#FFFFFF' }, // green bg, white text
-        6: { bg: '#0f0f0f', text: '#a17f3b' }, // black bg, gold text
-        7: { bg: '#e06f41', text: '#000000' }, //  orange bg, black text
-        8: { bg: '#de839d', text: '#000000' }, // Pink bg, black text
-        9: { bg: '#53b594', text: '#000000' }  // teal bg, white text
-      };
-
-      el.style.backgroundColor = colors[num].bg;
-      el.style.color = colors[num].text;
-
-      el.style.top = getRandomInt(80, window.innerHeight - 50) + "px";
-      el.style.left = getRandomInt(0, window.innerWidth - 50) + "px";
-
-      document.body.appendChild(el);
-
-      setTimeout(() => {
-        el.remove();
-      }, 300);
+  document.getElementById("toggleBtn").addEventListener("click", () => {
+    if (running) {
+      clearInterval(intervalId);
+      document.getElementById("toggleBtn").textContent = "Start";
+    } else {
+      intervalId = setInterval(() => {
+        for (let i = 0; i < 3; i++) {
+          spawnNumber();
+        }
+      }, 50);
+      document.getElementById("toggleBtn").textContent = "Stop";
     }
+    running = !running;
+  });
+</script>
 
-    let intervalId = setInterval(() => {
-      for (let i = 0; i < 3; i++) {
-        spawnNumber();
-      }
-    }, 50);
-
-    let running = true;
-
-    document.getElementById("toggleBtn").addEventListener("click", () => {
-      if (running) {
-        clearInterval(intervalId);
-        document.getElementById("toggleBtn").textContent = "Start";
-      } else {
-        intervalId = setInterval(() => {
-          for (let i = 0; i < 3; i++) {
-            spawnNumber();
-          }
-        }, 50);
-        document.getElementById("toggleBtn").textContent = "Stop";
-      }
-      running = !running;
-    });
-  </script>
 </body>
 </html>
