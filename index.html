@@ -13,30 +13,6 @@
       font-family: 'Arial', sans-serif;
     }
 
- .title {
-  position: relative;
-  margin-top: 20px;
-  margin-bottom: 30px;  /* ⬅️ this adds space between title and button */
-  text-align: center;
-  color: #ffffff;
-  font-size: 60px;
-  font-weight: bold;
-  z-index: 10;
-}
-.button {
-  display: block;
-  margin: 0 auto;
-  padding: 15px 30px;
-  font-size: 22px;
-  font-weight: bold;
-  background-color: #f21137;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  z-index: 10;
-}
-
 .number {
   position: absolute;
   font-size: 150px;
@@ -46,18 +22,8 @@
 }
 
 @media (max-width: 768px) {
-  .title {
-    font-size: 20px;  /* Smaller title on mobile */
-  }
-
   .number {
     font-size: 130px;  /* Smaller numbers on mobile */
-  }
-
-  .button {
-    top: 20px;
-    font-size: 18px;
-    padding: 10px 20px;
   }
 }
 
@@ -69,9 +35,6 @@
   </style>
 </head>
 <body>
-  <div class="title">Singh's Flashing Numbers</div>
-  <button class="button" id="toggleBtn">Stop</button>
-
  <script>
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
