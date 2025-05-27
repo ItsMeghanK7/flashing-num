@@ -61,23 +61,6 @@
       spawnNumber();
     }
   }, 50);
-
-  let running = true;
-
-  document.getElementById("toggleBtn").addEventListener("click", () => {
-    if (running) {
-      clearInterval(intervalId);
-      document.getElementById("toggleBtn").textContent = "Start";
-    } else {
-      intervalId = setInterval(() => {
-        for (let i = 0; i < 3; i++) {
-          spawnNumber();
-        }
-      }, 50);
-      document.getElementById("toggleBtn").textContent = "Stop";
-    }
-    running = !running;
-  });
 </script>
 
 </body>
